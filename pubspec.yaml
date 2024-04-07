@@ -40,6 +40,7 @@ dependencies:
   fpdart: ^1.1.0
   supabase_flutter: ^2.4.0
   dartdoc: ^8.0.8
+  mockito: ^5.4.4
 
 dev_dependencies:
   flutter_test:

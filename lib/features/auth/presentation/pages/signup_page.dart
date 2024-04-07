@@ -1,8 +1,10 @@
 import 'package:blog_supabase/core/theme/app_pallete.dart';
+import 'package:blog_supabase/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:blog_supabase/features/auth/presentation/pages/login_page.dart';
 import 'package:blog_supabase/features/auth/presentation/widgets/auth_field.dart';
 import 'package:blog_supabase/features/auth/presentation/widgets/auth_gradient_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -27,6 +29,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
   @override
   Widget build(BuildContext context) {
+    final authBloc = context.read<AuthBloc>();
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(15.0),
@@ -52,7 +55,20 @@ class _SignUpPageState extends State<SignUpPage> {
                   controller: passwordEC,
                   obscureText: true),
               const SizedBox(height: 15),
-              const AuthGradientButton(text: 'Sign Up'),
+              AuthGradientButton(
+                text: 'Sign Up',
+                onPressed: () {
+                  if (formKey.currentState!.validate()) {
+                    authBloc.add(
+                      SignUpWithEmailAndPassword(
+                        name: nameEC.text.trim(),
+                        email: emailEC.text.trim(),
+                        password: passwordEC.text.trim(),
+                      ),
+                    );
+                  }
+                },
+              ),
               const SizedBox(height: 15),
               GestureDetector(
                 onTap: () {

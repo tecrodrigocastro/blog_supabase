@@ -48,9 +48,7 @@ class _LoginPageState extends State<LoginPage> {
                   controller: passwordEC,
                   obscureText: true),
               const SizedBox(height: 15),
-              const AuthGradientButton(
-                text: 'Sign In',
-              ),
+              AuthGradientButton(text: 'Sign In', onPressed: () {}),
               const SizedBox(height: 15),
               GestureDetector(
                 onTap: () {
