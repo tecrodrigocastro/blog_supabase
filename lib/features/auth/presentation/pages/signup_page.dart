@@ -1,4 +1,5 @@
 import 'package:blog_supabase/core/theme/app_pallete.dart';
+import 'package:blog_supabase/features/auth/presentation/pages/login_page.dart';
 import 'package:blog_supabase/features/auth/presentation/widgets/auth_field.dart';
 import 'package:blog_supabase/features/auth/presentation/widgets/auth_gradient_button.dart';
 import 'package:flutter/material.dart';
@@ -51,21 +52,29 @@ class _SignUpPageState extends State<SignUpPage> {
                   controller: passwordEC,
                   obscureText: true),
               const SizedBox(height: 15),
-              const AuthGradientButton(),
+              const AuthGradientButton(text: 'Sign Up'),
               const SizedBox(height: 15),
-              RichText(
-                text: TextSpan(
-                  text: 'Already have an account? ',
-                  style: Theme.of(context).textTheme.titleMedium,
-                  children: [
-                    TextSpan(
-                      text: 'Sign In',
-                      style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                            color: AppPallete.gradient2,
-                            fontWeight: FontWeight.bold,
-                          ),
-                    ),
-                  ],
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return const LoginPage();
+                  }));
+                },
+                child: RichText(
+                  text: TextSpan(
+                    text: 'Already have an account? ',
+                    style: Theme.of(context).textTheme.titleMedium,
+                    children: [
+                      TextSpan(
+                        text: 'Sign In',
+                        style:
+                            Theme.of(context).textTheme.titleMedium!.copyWith(
+                                  color: AppPallete.gradient2,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
