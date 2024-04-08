@@ -1,14 +1,15 @@
 import 'package:blog_supabase/core/error/failure.dart';
 import 'package:blog_supabase/core/usecases/usecase.dart';
+import 'package:blog_supabase/features/auth/domain/entities/user_entity.dart';
 import 'package:blog_supabase/features/auth/domain/repositories/auth_repository.dart';
 import 'package:fpdart/src/either.dart';
 
-class UserSignUpCase implements UseCase<String, UserSignUpCaseParams> {
+class UserSignUpCase implements UseCase<UserEntity, UserSignUpCaseParams> {
   final AuthRepository repository;
 
   UserSignUpCase(this.repository);
   @override
-  Future<Either<Failure, String>> call(UserSignUpCaseParams params) async {
+  Future<Either<Failure, UserEntity>> call(UserSignUpCaseParams params) async {
     return await repository.signUpWithEmailAndPassword(
       name: params.name,
       email: params.email,

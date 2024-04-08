@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:blog_supabase/features/auth/domain/entities/user_entity.dart';
 import 'package:blog_supabase/features/auth/domain/usecases/user_sign_up.dart';
 import 'package:equatable/equatable.dart';
 
@@ -22,7 +23,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           (value) {
             value.fold(
               (failure) => emit(AuthError(failure.message)),
-              (uuid) => emit(AuthSuccess(uuid)),
+              (user) => emit(AuthSuccess(user)),
             );
           },
         );
