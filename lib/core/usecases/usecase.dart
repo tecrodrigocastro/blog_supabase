@@ -15,3 +15,8 @@ abstract interface class UseCase<Type, Params> {
   /// Aqui, `Failure` representa um erro, enquanto `Type` seria o tipo de resultado esperado se a operação for bem-sucedida.
   Future<Either<Failure, Type>> call(Params params);
 }
+
+/// `NoParams` é uma classe vazia que pode ser usada como um parâmetro para casos de uso que não precisam de parâmetros.
+/// Por exemplo, o caso de uso `CurrentUserCase` não precisa de parâmetros, pois ele simplesmente retorna o usuário autenticado atualmente.
+/// Nesse caso, você pode usar `NoParams` como o tipo de parâmetro.
+class NoParams {}

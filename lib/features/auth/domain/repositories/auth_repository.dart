@@ -23,4 +23,11 @@ abstract interface class AuthRepository {
     required String email,
     required String password,
   });
+
+  /// Método `getCurrentUser` é usado para obter o usuário autenticado atualmente. Ele não recebe parâmetros
+  /// e retorna um `Future<Either<Failure, UserEntity>>`, indicando que pode resultar em um `Failure`
+  /// (se ocorrer um erro) ou em uma `UserEntity` (se a operação for bem-sucedida).
+  /// Se nenhum usuário estiver autenticado, o método deve retornar um `Failure` com a mensagem "No user is signed in".
+  /// Se um usuário estiver autenticado, o método deve retornar uma `UserEntity` com os dados do usuário autenticado.
+  Future<Either<Failure, UserEntity>> getCurrentUser();
 }

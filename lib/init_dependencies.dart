@@ -1,6 +1,7 @@
 import 'package:blog_supabase/core/env/app_secrets.dart';
 import 'package:blog_supabase/features/auth/data/datasources/auth_remote_data_sources.dart';
 import 'package:blog_supabase/features/auth/data/repositories/auth_repository_impl.dart';
+import 'package:blog_supabase/features/auth/domain/usecases/current_user.dart';
 import 'package:blog_supabase/features/auth/domain/usecases/user_login.dart';
 import 'package:blog_supabase/features/auth/domain/usecases/user_sign_up.dart';
 import 'package:blog_supabase/features/auth/presentation/bloc/auth_bloc.dart';
@@ -46,10 +47,17 @@ void initFeatures() {
     ),
   );
 
+  autoInjector.registerFactory<CurrentUserCase>(
+    () => CurrentUserCase(
+      autoInjector<AuthRepositoryImpl>(),
+    ),
+  );
+
   autoInjector.registerLazySingleton(
     () => AuthBloc(
       userSignUpCase: autoInjector<UserSignUpCase>(),
       userLoginCase: autoInjector<UserLoginCase>(),
+      currentUserCase: autoInjector<CurrentUserCase>(),
     ),
   );
 }
