@@ -13,12 +13,15 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         super(AuthInitial()) {
     on<SignUpWithEmailAndPassword>(
       (event, emit) async {
+        emit(AuthLoading());
         await _userSignUpCase
-            .call(UserSignUpCaseParams(
-          name: event.name,
-          email: event.email,
-          password: event.password,
-        ))
+            .call(
+          UserSignUpCaseParams(
+            name: event.name,
+            email: event.email,
+            password: event.password,
+          ),
+        )
             .then(
           (value) {
             value.fold(
