@@ -1,13 +1,12 @@
-import 'package:auto_injector/auto_injector.dart';
 import 'package:blog_supabase/core/env/app_secrets.dart';
 import 'package:blog_supabase/features/auth/data/datasources/auth_remote_data_sources.dart';
 import 'package:blog_supabase/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:blog_supabase/features/auth/domain/usecases/user_sign_up.dart';
 import 'package:blog_supabase/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-final autoInjector = AutoInjector();
+final autoInjector = GetIt.instance;
 
 Future<void> initDependencies() async {
   initFeatures();
@@ -17,36 +16,31 @@ Future<void> initDependencies() async {
     debug: true,
   );
 
-  autoInjector.addLazySingleton(() => supabase.client);
+  autoInjector.registerLazySingleton(() => supabase.client);
 }
 
 void initFeatures() {
-  final config = BindConfig<Bloc>(
-    onDispose: (bloc) => bloc.close(),
-    notifier: (bloc) => bloc.stream,
-  );
   // Auth
-  autoInjector.add<AuthRemoteDataSourcesImpl>(
-    (i) => AuthRemoteDataSourcesImpl(
-      supabaseClient: i<SupabaseClient>(),
+  autoInjector.registerFactory<AuthRemoteDataSources>(
+    () => AuthRemoteDataSourcesImpl(
+      supabaseClient: autoInjector(),
     ),
   );
 
-  autoInjector.add<AuthRepositoryImpl>(
-    (i) => AuthRepositoryImpl(
-      i<AuthRemoteDataSources>(),
+  autoInjector.registerFactory<AuthRepositoryImpl>(
+    () => AuthRepositoryImpl(
+      autoInjector(),
     ),
   );
 
-  autoInjector.add<UserSignUpCase>(
-    (i) => UserSignUpCase(
-      i<AuthRepositoryImpl>(),
+  autoInjector.registerFactory<UserSignUpCase>(
+    () => UserSignUpCase(
+      autoInjector<AuthRepositoryImpl>(),
     ),
   );
-  autoInjector.addLazySingleton(
-    (i) => AuthBloc(
-      userSignUpCase: i<UserSignUpCase>(),
+  autoInjector.registerLazySingleton(
+    () => AuthBloc(
+      userSignUpCase: autoInjector<UserSignUpCase>(),
     ),
-    config: config,
   );
 }
