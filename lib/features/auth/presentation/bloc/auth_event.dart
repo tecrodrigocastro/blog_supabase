@@ -21,3 +21,16 @@ class SignUpWithEmailAndPassword extends AuthEvent {
   @override
   List<Object> get props => [name, email, password];
 }
+
+class LoginWithEmailAndPassword extends AuthEvent {
+  final String email;
+  final String password;
+
+  const LoginWithEmailAndPassword({
+    required this.email,
+    required this.password,
+  });
+
+  @override
+  List<Object> get props => [email, password];
+}

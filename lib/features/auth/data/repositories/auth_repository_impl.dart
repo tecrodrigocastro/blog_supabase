@@ -4,7 +4,6 @@ import 'package:blog_supabase/features/auth/data/datasources/auth_remote_data_so
 import 'package:blog_supabase/features/auth/domain/entities/user_entity.dart';
 import 'package:blog_supabase/features/auth/domain/repositories/auth_repository.dart';
 import 'package:fpdart/fpdart.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
   final AuthRemoteDataSources authDataSource;
@@ -22,7 +21,7 @@ class AuthRepositoryImpl implements AuthRepository {
         password: password,
       );
       return Right(result);
-    } on AuthException catch (e) {
+    } on ServerException catch (e) {
       return Left(Failure(e.message));
     }
   }

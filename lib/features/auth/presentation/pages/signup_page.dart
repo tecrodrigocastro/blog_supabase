@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:blog_supabase/core/common/widgets/loading.dart';
 import 'package:blog_supabase/core/theme/app_pallete.dart';
 import 'package:blog_supabase/core/utils/show_snackbar.dart';
@@ -43,7 +41,15 @@ class _SignUpPageState extends State<SignUpPage> {
               showMessageSnackBar(context, state.message, color: Colors.red);
             }
             if (state is AuthSuccess) {
-              log('DEU BOM');
+              showMessageSnackBar(context, 'Conta cria com sucesso',
+                  color: Colors.green);
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) {
+                    return const LoginPage();
+                  },
+                ),
+              );
             }
           },
           builder: (context, state) {
