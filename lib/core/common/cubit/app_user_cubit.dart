@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:blog_supabase/features/auth/domain/entities/user_entity.dart';
 import 'package:equatable/equatable.dart';
 
 part 'app_user_state.dart';
