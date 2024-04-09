@@ -54,6 +54,30 @@ class _AddNewBlogPageState extends State<AddNewBlogPage> {
                 ),
               ),
             ),
+            const SizedBox(height: 20),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  'Technology',
+                  'Business',
+                  'Programming',
+                  'Entertainment',
+                ]
+                    .map(
+                      (e) => Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Chip(
+                          label: Text(e),
+                          side: const BorderSide(
+                            color: Colors.grey,
+                          ),
+                        ),
+                      ),
+                    )
+                    .toList(),
+              ),
+            ),
           ],
         ),
       ),
