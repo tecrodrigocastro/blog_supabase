@@ -1,3 +1,4 @@
+import 'package:blog_supabase/core/common/cubit/app_user_cubit.dart';
 import 'package:blog_supabase/core/theme/theme.dart';
 import 'package:blog_supabase/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:blog_supabase/features/auth/presentation/pages/login_page.dart';
@@ -14,6 +15,7 @@ void main() async {
         BlocProvider(
           create: (context) => autoInjector<AuthBloc>(),
         ),
+        BlocProvider(create: (context) => autoInjector<AppUserCubit>()),
       ],
       child: const AppWidget(),
     ),
@@ -40,7 +42,21 @@ class _AppWidgetState extends State<AppWidget> {
       debugShowCheckedModeBanner: false,
       title: 'Blog Supabase',
       theme: AppTheme.darkThemeMode,
-      home: const LoginPage(),
+      home: BlocSelector<AppUserCubit, AppUserState, bool>(
+        selector: (state) {
+          return state is AppUserLoggedIn;
+        },
+        builder: (context, isLoggedIn) {
+          if (isLoggedIn) {
+            return const Scaffold(
+              body: Center(
+                child: Text('Home Page'),
+              ),
+            );
+          }
+          return const LoginPage();
+        },
+      ),
     );
   }
 }

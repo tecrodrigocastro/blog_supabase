@@ -1,6 +1,6 @@
+import 'package:blog_supabase/core/common/entities/user_entity.dart';
 import 'package:blog_supabase/core/error/failure.dart';
 import 'package:blog_supabase/core/usecases/usecase.dart';
-import 'package:blog_supabase/features/auth/domain/entities/user_entity.dart';
 import 'package:blog_supabase/features/auth/domain/repositories/auth_repository.dart';
 import 'package:fpdart/src/either.dart';
 

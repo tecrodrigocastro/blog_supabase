@@ -1,3 +1,4 @@
+import 'package:blog_supabase/core/common/cubit/app_user_cubit.dart';
 import 'package:blog_supabase/core/env/app_secrets.dart';
 import 'package:blog_supabase/features/auth/data/datasources/auth_remote_data_sources.dart';
 import 'package:blog_supabase/features/auth/data/repositories/auth_repository_impl.dart';
@@ -19,6 +20,8 @@ Future<void> initDependencies() async {
   );
 
   autoInjector.registerLazySingleton(() => supabase.client);
+
+  autoInjector.registerLazySingleton(() => AppUserCubit());
 }
 
 void initFeatures() {
@@ -58,6 +61,7 @@ void initFeatures() {
       userSignUpCase: autoInjector<UserSignUpCase>(),
       userLoginCase: autoInjector<UserLoginCase>(),
       currentUserCase: autoInjector<CurrentUserCase>(),
+      appUserCubit: autoInjector<AppUserCubit>(),
     ),
   );
 }

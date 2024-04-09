@@ -1,7 +1,7 @@
+import 'package:blog_supabase/core/common/entities/user_entity.dart';
 import 'package:blog_supabase/core/error/exception.dart';
 import 'package:blog_supabase/core/error/failure.dart';
 import 'package:blog_supabase/features/auth/data/datasources/auth_remote_data_sources.dart';
-import 'package:blog_supabase/features/auth/domain/entities/user_entity.dart';
 import 'package:blog_supabase/features/auth/domain/repositories/auth_repository.dart';
 import 'package:fpdart/fpdart.dart';
 
