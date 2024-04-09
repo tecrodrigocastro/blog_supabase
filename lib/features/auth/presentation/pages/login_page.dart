@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:blog_supabase/core/common/widgets/loading.dart';
 import 'package:blog_supabase/core/theme/app_pallete.dart';
 import 'package:blog_supabase/core/utils/show_snackbar.dart';
@@ -7,6 +5,7 @@ import 'package:blog_supabase/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:blog_supabase/features/auth/presentation/pages/signup_page.dart';
 import 'package:blog_supabase/features/auth/presentation/widgets/auth_field.dart';
 import 'package:blog_supabase/features/auth/presentation/widgets/auth_gradient_button.dart';
+import 'package:blog_supabase/features/blog/presentation/pages/blog_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -41,7 +40,15 @@ class _LoginPageState extends State<LoginPage> {
               showMessageSnackBar(context, state.message, color: Colors.red);
             }
             if (state is AuthSuccess) {
-              log('DEU BOM');
+              showMessageSnackBar(context, 'Bem vindo, ${state.user.name}');
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return const BlogPage();
+                  },
+                ),
+              );
             }
           },
           builder: (context, state) {
