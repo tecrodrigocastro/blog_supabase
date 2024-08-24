@@ -12,7 +12,7 @@ class AppTheme {
   static final darkThemeMode = ThemeData.dark().copyWith(
     scaffoldBackgroundColor: AppPallete.backgroundColor,
     chipTheme: const ChipThemeData(
-      color: MaterialStatePropertyAll(AppPallete.backgroundColor),
+      color: WidgetStatePropertyAll(AppPallete.backgroundColor),
       side: BorderSide.none,
     ),
     inputDecorationTheme: InputDecorationTheme(

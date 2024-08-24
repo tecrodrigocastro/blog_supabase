@@ -43,6 +43,8 @@ dependencies:
   mockito: ^5.4.4
   get_it: ^7.6.8
   dotted_border: ^2.1.0
+  image_picker: ^1.1.2
+  uuid: ^4.4.2
 dev_dependencies:
   flutter_test:
     sdk: flutter
